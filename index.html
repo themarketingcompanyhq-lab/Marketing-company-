@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SignalMint — Performance marketing for Indian D2C brands</title>
+<meta name="description" content="SignalMint is an AI-native performance marketing team for Indian D2C brands. Meta ads, creative strategy, and diagnostics that find waste before it finds your budget.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0b0d;
+  --bg-raised:#101214;
+  --ink:#e8ebe9;
+  --ink-dim:#8f9694;
+  --ink-faint:#5c6260;
+  --mint:#3ecf8e;
+  --mint-soft:rgba(62,207,142,0.14);
+  --line:rgba(232,235,233,0.09);
+  --line-soft:rgba(232,235,233,0.05);
+  --max:1180px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+::selection{background:var(--mint);color:var(--bg);}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+.serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400;}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 32px;}
+a{color:inherit;}
+
+/* ---------- Nav ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  background:rgba(10,11,13,0.82);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line-soft);
+}
+.nav{
+  max-width:var(--max);margin:0 auto;padding:0 32px;
+  height:64px;display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-weight:600;font-size:15px;letter-spacing:-0.01em;text-decoration:none;}
+.logo .dot{color:var(--mint);}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{font-size:14px;color:var(--ink-dim);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-links a.book{
+  color:var(--bg);background:var(--ink);padding:8px 18px;border-radius:99px;
+  font-weight:500;transition:background .2s;
+}
+.nav-links a.book:hover{background:var(--mint);}
+@media(max-width:720px){.nav-links a:not(.book){display:none;}}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;align-items:center;
+  overflow:hidden;
+}
+canvas#field{position:absolute;inset:0;width:100%;height:100%;display:block;}
+.hero-inner{
+  position:relative;z-index:2;
+  max-width:var(--max);margin:0 auto;padding:120px 32px 80px;
+  width:100%;
+}
+.kicker{
+  font-size:13px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--mint);margin-bottom:24px;font-weight:500;
+}
+.hero h1{
+  font-weight:500;
+  font-size:clamp(38px,5.6vw,72px);
+  line-height:1.06;
+  letter-spacing:-0.03em;
+  max-width:13em;
+}
+.hero h1 em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;color:var(--mint);}
+.hero p{
+  margin-top:28px;max-width:480px;
+  font-size:17px;color:var(--ink-dim);
+}
+.hero-cta{margin-top:40px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+.btn{
+  display:inline-block;text-decoration:none;font-weight:500;font-size:15px;
+  padding:14px 28px;border-radius:99px;transition:background .2s,color .2s,border-color .2s;
+}
+.btn-solid{background:var(--ink);color:var(--bg);}
+.btn-solid:hover{background:var(--mint);}
+.btn-ghost{border:1px solid var(--line);color:var(--ink-dim);}
+.btn-ghost:hover{border-color:var(--ink-dim);color:var(--ink);}
+
+/* ---------- Sections ---------- */
+section{border-top:1px solid var(--line-soft);}
+.section-pad{padding:110px 0;}
+.eyebrow{
+  font-size:13px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--ink-faint);margin-bottom:20px;font-weight:500;
+}
+.eyebrow b{color:var(--mint);font-weight:500;}
+
+/* Statement */
+.statement h2{
+  font-weight:500;
+  font-size:clamp(26px,3.6vw,44px);
+  line-height:1.22;letter-spacing:-0.02em;
+  max-width:21em;
+}
+.statement h2 em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;color:var(--ink-dim);}
+
+/* Stats */
+.stats{display:flex;gap:64px;flex-wrap:wrap;align-items:flex-end;}
+.stat .num{
+  font-size:clamp(48px,6vw,80px);font-weight:500;letter-spacing:-0.03em;line-height:1;
+}
+.stat .num span{color:var(--mint);}
+.stat .label{margin-top:10px;font-size:14px;color:var(--ink-dim);}
+.stats .note{
+  max-width:420px;font-size:15px;color:var(--ink-dim);
+  padding-bottom:6px;margin-left:auto;
+}
+
+/* Services */
+.svc-list{margin-top:8px;}
+.svc{
+  display:flex;justify-content:space-between;align-items:baseline;gap:24px;
+  padding:22px 0;border-bottom:1px solid var(--line-soft);
+}
+.svc:last-child{border-bottom:none;}
+.svc .name{font-size:19px;font-weight:500;letter-spacing:-0.01em;}
+.svc .desc{font-size:14px;color:var(--ink-dim);max-width:440px;text-align:right;}
+@media(max-width:720px){
+  .svc{flex-direction:column;gap:6px;}
+  .svc .desc{text-align:left;}
+}
+
+/* Deep dives */
+.dd-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.dd-grid.flip .dd-visual{order:-1;}
+@media(max-width:860px){
+  .dd-grid{grid-template-columns:1fr;gap:40px;}
+  .dd-grid.flip .dd-visual{order:0;}
+}
+.dd-body h3{font-size:clamp(24px,3vw,34px);font-weight:500;letter-spacing:-0.02em;margin-bottom:18px;}
+.dd-body p{color:var(--ink-dim);font-size:16px;margin-bottom:16px;max-width:440px;}
+.dd-body p.small{font-size:14px;color:var(--ink-faint);}
+.dd-visual{
+  background:var(--bg-raised);border:1px solid var(--line-soft);border-radius:14px;
+  min-height:300px;display:flex;align-items:center;justify-content:center;
+  padding:32px;overflow:hidden;
+}
+
+/* Soren visual */
+.soren-bars{display:flex;align-items:flex-end;gap:8px;height:160px;width:100%;max-width:360px;}
+.soren-bar{
+  flex:1;background:var(--line);border-radius:4px 4px 0 0;
+  transform-origin:bottom;transform:scaleY(0);transition:transform 1s cubic-bezier(.2,.7,.2,1);
+}
+.soren-bar.hot{background:var(--mint);opacity:0.85;}
+.in .soren-bar{transform:scaleY(1);}
+
+/* Labs visual */
+.labs-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:400px;}
+.labs-cell{
+  background:var(--bg);border:1px solid var(--line-soft);border-radius:10px;
+  padding:14px 16px;
+}
+.labs-cell .lbl{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:4px;}
+.labs-cell .val{font-size:14px;font-weight:500;}
+.labs-cell.ok .val{color:var(--mint);}
+.labs-cell.warn .val{color:#e6b455;}
+
+/* UGC visual */
+.ugc-row{display:flex;flex-direction:column;gap:10px;width:100%;max-width:400px;}
+.ugc-step{
+  display:flex;align-items:center;gap:14px;
+  background:var(--bg);border:1px solid var(--line-soft);border-radius:10px;padding:14px 16px;
+}
+.ugc-step .n{
+  width:26px;height:26px;flex:none;border-radius:50%;
+  background:var(--mint-soft);color:var(--mint);
+  display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;
+}
+.ugc-step .t{font-size:14px;color:var(--ink-dim);}
+.ugc-step .t b{color:var(--ink);font-weight:500;}
+
+/* Testimonial */
+.testimonial blockquote{
+  font-family:'Instrument Serif',Georgia,serif;
+  font-size:clamp(24px,3.2vw,38px);line-height:1.32;
+  max-width:22em;letter-spacing:-0.01em;
+}
+.testimonial blockquote em{font-style:italic;color:var(--mint);}
+.testimonial .attr{margin-top:28px;font-size:14px;color:var(--ink-dim);}
+
+/* Closing */
+.closing{text-align:center;}
+.closing h2{
+  font-weight:500;font-size:clamp(30px,4.4vw,54px);
+  letter-spacing:-0.025em;line-height:1.12;max-width:15em;margin:0 auto 20px;
+}
+.closing h2 em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;color:var(--mint);}
+.closing p{color:var(--ink-dim);max-width:440px;margin:0 auto 40px;}
+
+/* Footer */
+footer{border-top:1px solid var(--line-soft);padding:48px 0;}
+.foot{
+  max-width:var(--max);margin:0 auto;padding:0 32px;
+  display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;
+}
+.foot .fnote{font-size:13px;color:var(--ink-faint);max-width:400px;line-height:1.6;}
+.foot .flinks{display:flex;gap:24px;font-size:13px;}
+.foot .flinks a{color:var(--ink-dim);text-decoration:none;transition:color .2s;}
+.foot .flinks a:hover{color:var(--ink);}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  .soren-bar{transform:scaleY(1);transition:none;}
+}
+@media(max-width:720px){
+  .section-pad{padding:72px 0;}
+  .stats{gap:36px;}
+  .stats .note{margin-left:0;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a class="logo" href="#top">signalmint<span class="dot">.</span></a>
+    <nav class="nav-links">
+      <a href="#soren">Soren AI</a>
+      <a href="#labs">Signal Labs</a>
+      <a href="#ugc">Mint UGC</a>
+      <a class="book" href="#" data-book>Book a call</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<div class="hero" id="top">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <div class="kicker">Performance marketing · Indian D2C</div>
+    <h1>We read the signal in your ad spend <em>before it burns the budget.</em></h1>
+    <p>SignalMint runs Meta ads, creative strategy, and account diagnostics for D2C brands that are done guessing. Every recommendation starts with the data, not an opinion.</p>
+    <div class="hero-cta">
+      <a class="btn btn-solid" href="#" data-book>Book a call</a>
+      <a class="btn btn-ghost" href="#labs">See how we audit</a>
+    </div>
+  </div>
+</div>
+
+<!-- Stats -->
+<section>
+  <div class="wrap section-pad">
+    <div class="stats reveal">
+      <div class="stat">
+        <div class="num"><span class="count" data-target="17">0</span><span>+</span></div>
+        <div class="label">brands served</div>
+      </div>
+      <div class="stat">
+        <div class="num"><span class="count" data-target="4.5" data-decimal="1">0</span><span>x</span></div>
+        <div class="label">average ROAS</div>
+      </div>
+      <div class="note">Meta ads, creative strategy, audit diagnostics, retention systems, content production, and ad intelligence — one team, one methodology.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Statement + services -->
+<section>
+  <div class="wrap section-pad">
+    <div class="eyebrow reveal">What we do</div>
+    <div class="statement reveal">
+      <h2>Most agencies form an opinion and then look for data to defend it. <em>We do it the other way round.</em></h2>
+    </div>
+    <div class="svc-list" style="margin-top:56px;">
+      <div class="svc reveal"><div class="name">Meta Ads</div><div class="desc">Full-funnel campaign management with structure built for scale, not vanity metrics.</div></div>
+      <div class="svc reveal"><div class="name">Creative Strategy</div><div class="desc">Concepts driven by what your account data says converts, refreshed before fatigue sets in.</div></div>
+      <div class="svc reveal"><div class="name">Audit Diagnostics</div><div class="desc">A fixed diagnostic framework applied to every account — findings that hold regardless of who ran the audit.</div></div>
+      <div class="svc reveal"><div class="name">Retention Systems</div><div class="desc">Email and lifecycle flows so acquisition wins don't leak out the back door.</div></div>
+      <div class="svc reveal"><div class="name">Content Production</div><div class="desc">UGC, statics, and AI-assisted edits produced at the pace paid social actually demands.</div></div>
+      <div class="svc reveal"><div class="name">Ad Intelligence</div><div class="desc">Continuous monitoring across accounts so problems surface before they show up in reporting.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Soren AI -->
+<section id="soren">
+  <div class="wrap section-pad">
+    <div class="dd-grid">
+      <div class="dd-body reveal">
+        <div class="eyebrow"><b>01</b> — Intelligence layer</div>
+        <h3>Soren AI</h3>
+        <p>Our in-house intelligence engine watches every live campaign in real time. It flags creative fatigue, audience overlap, and bid inefficiencies while they're still cheap to fix.</p>
+        <p class="small">Soren correlates performance drift with creative lifecycle, audience saturation, and competitive shifts — so the recommendation arrives before the wasted spend does, not in next month's report.</p>
+      </div>
+      <div class="dd-visual reveal" id="sorenVis">
+        <div class="soren-bars" aria-hidden="true">
+          <div class="soren-bar" style="height:38%;transition-delay:.05s"></div>
+          <div class="soren-bar" style="height:60%;transition-delay:.1s"></div>
+          <div class="soren-bar" style="height:52%;transition-delay:.15s"></div>
+          <div class="soren-bar hot" style="height:88%;transition-delay:.2s"></div>
+          <div class="soren-bar" style="height:64%;transition-delay:.25s"></div>
+          <div class="soren-bar" style="height:46%;transition-delay:.3s"></div>
+          <div class="soren-bar hot" style="height:94%;transition-delay:.35s"></div>
+          <div class="soren-bar" style="height:70%;transition-delay:.4s"></div>
+          <div class="soren-bar" style="height:56%;transition-delay:.45s"></div>
+          <div class="soren-bar" style="height:74%;transition-delay:.5s"></div>
+          <div class="soren-bar" style="height:42%;transition-delay:.55s"></div>
+          <div class="soren-bar hot" style="height:82%;transition-delay:.6s"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Signal Labs -->
+<section id="labs">
+  <div class="wrap section-pad">
+    <div class="dd-grid flip">
+      <div class="dd-body reveal">
+        <div class="eyebrow"><b>02</b> — Audit methodology</div>
+        <h3>Signal Labs</h3>
+        <p>One diagnostic framework, applied to every account without exception. Because every brand goes through the same audit model, the findings hold whatever the category, the scale, or who picked up the brief.</p>
+        <p class="small">Covers campaign architecture, pixel and CAPI health, creative fatigue scoring, audience overlap, bid strategy fit, and attribution integrity — cross-checked against category benchmarks before we recommend anything.</p>
+      </div>
+      <div class="dd-visual reveal">
+        <div class="labs-grid" aria-hidden="true">
+          <div class="labs-cell ok"><div class="lbl">Pixel health</div><div class="val">Clear</div></div>
+          <div class="labs-cell ok"><div class="lbl">CAPI match</div><div class="val">98.2%</div></div>
+          <div class="labs-cell warn"><div class="lbl">Audience overlap</div><div class="val">Review</div></div>
+          <div class="labs-cell ok"><div class="lbl">Creative fatigue</div><div class="val">Clear</div></div>
+          <div class="labs-cell ok"><div class="lbl">Bid strategy</div><div class="val">Optimal</div></div>
+          <div class="labs-cell warn"><div class="lbl">Attribution</div><div class="val">Drift</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mint UGC -->
+<section id="ugc">
+  <div class="wrap section-pad">
+    <div class="dd-grid">
+      <div class="dd-body reveal">
+        <div class="eyebrow"><b>03</b> — Creator network</div>
+        <h3>Mint UGC</h3>
+        <p>A managed creator network that turns briefs into production-ready content. Creators are matched to your brand, reviewed against quality gates, and paid on delivery — zero coordination overhead on your side.</p>
+        <p class="small">We handle the full lifecycle: brief, creator assignment, review, revision, delivery. Formats span UGC video, AI-assisted edits, and static creative at production scale.</p>
+      </div>
+      <div class="dd-visual reveal">
+        <div class="ugc-row" aria-hidden="true">
+          <div class="ugc-step"><div class="n">1</div><div class="t"><b>Brief in.</b> We translate your goal into a creator-ready brief.</div></div>
+          <div class="ugc-step"><div class="n">2</div><div class="t"><b>Matched.</b> Vetted creators assigned by category and format.</div></div>
+          <div class="ugc-step"><div class="n">3</div><div class="t"><b>Quality-gated.</b> Every asset reviewed and revised before you see it.</div></div>
+          <div class="ugc-step"><div class="n">4</div><div class="t"><b>Delivered.</b> Ad-ready content, on schedule, at scale.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonial -->
+<section>
+  <div class="wrap section-pad testimonial">
+    <blockquote class="reveal">"They diagnosed what three agencies missed in a single audit call. The difference is <em>they read the data before forming an opinion.</em>"</blockquote>
+    <div class="attr reveal">D2C founder, wellness category</div>
+  </div>
+</section>
+
+<!-- Closing CTA -->
+<section id="contact">
+  <div class="wrap section-pad closing">
+    <h2 class="reveal">Bring us the account. <em>We'll bring the signal.</em></h2>
+    <p class="reveal">A 30-minute call. We'll look at your account together and tell you exactly what we'd fix first — whether or not you hire us.</p>
+    <a class="btn btn-solid reveal" href="#" data-book>Book a call</a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot">
+    <div class="fnote">SignalMint is the performance marketing arm of Apexway Technologies Private Limited, Mumbai.<br>© 2026 Apexway Technologies Pvt. Ltd.</div>
+    <div class="flinks">
+      <a href="#" data-book>Book a call</a>
+      <a href="mailto:themarketingcompanyhq@gmail.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   TODO: replace with your real Calendly (or booking) link.
+   Every "Book a call" button on the page reads from this one URL.
+   ============================================================ */
+const BOOKING_URL = 'https://calendly.com/REPLACE-ME';
+document.querySelectorAll('[data-book]').forEach(a => {
+  a.href = BOOKING_URL;
+  a.target = '_blank';
+  a.rel = 'noopener';
+});
+
+/* ---------- Scroll reveal ---------- */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal, .dd-visual').forEach(el => io.observe(el));
+
+/* ---------- Counters ---------- */
+const counterIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    if (el.dataset.done) return;
+    el.dataset.done = '1';
+    const target = parseFloat(el.dataset.target);
+    const dec = parseInt(el.dataset.decimal || '0');
+    const start = performance.now();
+    function tick(now) {
+      const t = Math.min((now - start) / 1600, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      el.textContent = (target * ease).toFixed(dec);
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toFixed(dec);
+    }
+    requestAnimationFrame(tick);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.count').forEach(el => counterIO.observe(el));
+
+/* ---------- Particle head ---------- */
+const canvas = document.getElementById('field');
+const ctx = canvas.getContext('2d');
+let W, H, DPR;
+
+function resize() {
+  DPR = Math.min(window.devicePixelRatio || 1, 2);
+  W = canvas.clientWidth;
+  H = canvas.clientHeight;
+  canvas.width = W * DPR;
+  canvas.height = H * DPR;
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+}
+window.addEventListener('resize', resize);
+resize();
+
+/* Head profile: radius at each height level, chin (0) to skull (1) */
+function headRadius(t) {
+  if (t < 0.05) return 0.12 + t * 4;
+  if (t < 0.15) return 0.32 + (t - 0.05) * 3.5;
+  if (t < 0.25) return 0.67 + (t - 0.15) * 1.8;
+  if (t < 0.4) return 0.85 + (t - 0.25) * 0.5;
+  if (t < 0.55) return 0.92 - (t - 0.4) * 0.15;
+  if (t < 0.7) return 0.90 + (t - 0.55) * 0.2;
+  if (t < 0.82) return 0.93 - (t - 0.7) * 0.8;
+  if (t < 0.92) return 0.83 - (t - 0.82) * 3.5;
+  return 0.48 - (t - 0.92) * 5;
+}
+
+const rings = [];
+const RINGS = 50;
+for (let i = 0; i < RINGS; i++) {
+  const t = i / (RINGS - 1);
+  const y = 1 - t * 2;
+  const r = headRadius(t);
+  const n = Math.max(8, Math.round(r * 44));
+  const ring = [];
+  for (let j = 0; j < n; j++) {
+    const theta = (j / n) * Math.PI * 2;
+    ring.push({ x: Math.cos(theta) * r, y: y * 1.15, z: Math.sin(theta) * r });
+  }
+  rings.push(ring);
+}
+const allPts = rings.flat();
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let angle = 0.6;
+let mouseX = 0;
+window.addEventListener('mousemove', e => { mouseX = (e.clientX / W - 0.5) * 0.25; });
+
+function draw() {
+  if (!reduceMotion) angle += 0.0022;
+  const rot = angle + mouseX;
+  ctx.clearRect(0, 0, W, H);
+
+  /* Head sits right of centre on wide screens, behind the text on narrow ones */
+  const wide = W > 900;
+  const R = wide ? Math.min(W * 0.19, 250) : Math.min(W * 0.34, 200);
+  const cx = wide ? W * 0.74 : W * 0.5;
+  const cy = wide ? H * 0.48 : H * 0.30;
+  /* On narrow screens the head sits behind the text, so fade it well back */
+  const dim = wide ? 1 : 0.3;
+
+  /* Single, faint glow behind the head — deliberately subtle */
+  const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 1.3);
+  g.addColorStop(0, 'rgba(62,207,142,0.06)');
+  g.addColorStop(1, 'rgba(10,11,13,0)');
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, W, H);
+
+  const cosA = Math.cos(rot), sinA = Math.sin(rot);
+  const projected = allPts.map(p => {
+    const x = p.x * cosA - p.z * sinA;
+    const z = p.x * sinA + p.z * cosA;
+    const fov = 500;
+    const scale = fov / (fov - z * R);
+    return { sx: cx + x * R * scale, sy: cy + p.y * R * scale, z };
+  });
+
+  /* Latitude lines */
+  let offset = 0;
+  for (const ring of rings) {
+    const n = ring.length;
+    for (let j = 0; j < n; j++) {
+      const a = projected[offset + j];
+      const b = projected[offset + (j + 1) % n];
+      if (a.z < -0.3 && b.z < -0.3) continue;
+      const depth = ((a.z + b.z) / 2 + 1) / 2;
+      ctx.beginPath();
+      ctx.moveTo(a.sx, a.sy);
+      ctx.lineTo(b.sx, b.sy);
+      ctx.strokeStyle = `rgba(232,235,233,${(0.02 + depth * 0.07) * dim})`;
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+    }
+    offset += n;
+  }
+
+  /* Particles: neutral grey, mint only on the closest points */
+  projected.forEach(p => {
+    const depth = (p.z + 1) / 2;
+    ctx.beginPath();
+    ctx.arc(p.sx, p.sy, 0.4 + depth * 1.6, 0, Math.PI * 2);
+    if (depth > 0.82) {
+      ctx.fillStyle = `rgba(62,207,142,${(0.25 + depth * 0.45) * dim})`;
+    } else {
+      ctx.fillStyle = `rgba(232,235,233,${(0.05 + depth * 0.3) * dim})`;
+    }
+    ctx.fill();
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>

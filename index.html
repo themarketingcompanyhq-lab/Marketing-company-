@@ -3,27 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SignalMint — Performance marketing for Indian D2C brands</title>
+<title>SignalMint | Performance marketing for Indian D2C brands</title>
 <meta name="description" content="SignalMint is an AI-native performance marketing team for Indian D2C brands. Meta ads, creative strategy, and diagnostics that find waste before it finds your budget.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0a0b0d;
-  --bg-raised:#101214;
-  --ink:#e8ebe9;
-  --ink-dim:#8f9694;
-  --ink-faint:#5c6260;
-  --mint:#3ecf8e;
-  --mint-soft:rgba(62,207,142,0.14);
-  --line:rgba(232,235,233,0.09);
-  --line-soft:rgba(232,235,233,0.05);
+  --bg:#0a0814;
+  --bg-raised:#130d26;
+  --ink:#ede8f5;
+  --ink-dim:#8a8098;
+  --ink-faint:#5e5670;
+  --accent:#b08be0;
+  --accent-soft:rgba(176,139,224,0.16);
+  --line:rgba(237,232,245,0.10);
+  --line-soft:rgba(237,232,245,0.05);
   --max:1180px;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-::selection{background:var(--mint);color:var(--bg);}
+::selection{background:var(--accent);color:var(--bg);}
 body{
   background:var(--bg);
   color:var(--ink);
@@ -40,7 +40,7 @@ a{color:inherit;}
 /* ---------- Nav ---------- */
 header{
   position:fixed;top:0;left:0;right:0;z-index:50;
-  background:rgba(10,11,13,0.82);
+  background:rgba(10,8,20,0.82);
   backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line-soft);
 }
@@ -49,7 +49,7 @@ header{
   height:64px;display:flex;align-items:center;justify-content:space-between;
 }
 .logo{font-weight:600;font-size:15px;letter-spacing:-0.01em;text-decoration:none;}
-.logo .dot{color:var(--mint);}
+.logo .dot{color:var(--accent);}
 .nav-links{display:flex;gap:32px;align-items:center;}
 .nav-links a{font-size:14px;color:var(--ink-dim);text-decoration:none;transition:color .2s;}
 .nav-links a:hover{color:var(--ink);}
@@ -57,7 +57,7 @@ header{
   color:var(--bg);background:var(--ink);padding:8px 18px;border-radius:99px;
   font-weight:500;transition:background .2s;
 }
-.nav-links a.book:hover{background:var(--mint);}
+.nav-links a.book:hover{background:var(--accent);}
 @media(max-width:720px){.nav-links a:not(.book){display:none;}}
 
 /* ---------- Hero ---------- */
@@ -75,7 +75,7 @@ canvas#field{position:absolute;inset:0;width:100%;height:100%;display:block;}
 }
 .kicker{
   font-size:13px;letter-spacing:0.14em;text-transform:uppercase;
-  color:var(--mint);margin-bottom:24px;font-weight:500;
+  color:var(--accent);margin-bottom:24px;font-weight:500;
 }
 .hero h1{
   font-weight:500;
@@ -84,7 +84,7 @@ canvas#field{position:absolute;inset:0;width:100%;height:100%;display:block;}
   letter-spacing:-0.03em;
   max-width:13em;
 }
-.hero h1 em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;color:var(--mint);}
+.hero h1 em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;color:var(--accent);}
 .hero p{
   margin-top:28px;max-width:480px;
   font-size:17px;color:var(--ink-dim);
@@ -95,7 +95,7 @@ canvas#field{position:absolute;inset:0;width:100%;height:100%;display:block;}
   padding:14px 28px;border-radius:99px;transition:background .2s,color .2s,border-color .2s;
 }
 .btn-solid{background:var(--ink);color:var(--bg);}
-.btn-solid:hover{background:var(--mint);}
+.btn-solid:hover{background:var(--accent);}
 .btn-ghost{border:1px solid var(--line);color:var(--ink-dim);}
 .btn-ghost:hover{border-color:var(--ink-dim);color:var(--ink);}
 
@@ -106,7 +106,7 @@ section{border-top:1px solid var(--line-soft);}
   font-size:13px;letter-spacing:0.14em;text-transform:uppercase;
   color:var(--ink-faint);margin-bottom:20px;font-weight:500;
 }
-.eyebrow b{color:var(--mint);font-weight:500;}
+.eyebrow b{color:var(--accent);font-weight:500;}
 
 /* Statement */
 .statement h2{
@@ -122,7 +122,7 @@ section{border-top:1px solid var(--line-soft);}
 .stat .num{
   font-size:clamp(48px,6vw,80px);font-weight:500;letter-spacing:-0.03em;line-height:1;
 }
-.stat .num span{color:var(--mint);}
+.stat .num span{color:var(--accent);}
 .stat .label{margin-top:10px;font-size:14px;color:var(--ink-dim);}
 .stats .note{
   max-width:420px;font-size:15px;color:var(--ink-dim);
@@ -165,7 +165,7 @@ section{border-top:1px solid var(--line-soft);}
   flex:1;background:var(--line);border-radius:4px 4px 0 0;
   transform-origin:bottom;transform:scaleY(0);transition:transform 1s cubic-bezier(.2,.7,.2,1);
 }
-.soren-bar.hot{background:var(--mint);opacity:0.85;}
+.soren-bar.hot{background:var(--accent);opacity:0.85;}
 .in .soren-bar{transform:scaleY(1);}
 
 /* Labs visual */
@@ -176,7 +176,7 @@ section{border-top:1px solid var(--line-soft);}
 }
 .labs-cell .lbl{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:4px;}
 .labs-cell .val{font-size:14px;font-weight:500;}
-.labs-cell.ok .val{color:var(--mint);}
+.labs-cell.ok .val{color:var(--accent);}
 .labs-cell.warn .val{color:#e6b455;}
 
 /* UGC visual */
@@ -187,7 +187,7 @@ section{border-top:1px solid var(--line-soft);}
 }
 .ugc-step .n{
   width:26px;height:26px;flex:none;border-radius:50%;
-  background:var(--mint-soft);color:var(--mint);
+  background:var(--accent-soft);color:var(--accent);
   display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;
 }
 .ugc-step .t{font-size:14px;color:var(--ink-dim);}
@@ -199,7 +199,7 @@ section{border-top:1px solid var(--line-soft);}
   font-size:clamp(24px,3.2vw,38px);line-height:1.32;
   max-width:22em;letter-spacing:-0.01em;
 }
-.testimonial blockquote em{font-style:italic;color:var(--mint);}
+.testimonial blockquote em{font-style:italic;color:var(--accent);}
 .testimonial .attr{margin-top:28px;font-size:14px;color:var(--ink-dim);}
 
 /* Closing */
@@ -208,7 +208,7 @@ section{border-top:1px solid var(--line-soft);}
   font-weight:500;font-size:clamp(30px,4.4vw,54px);
   letter-spacing:-0.025em;line-height:1.12;max-width:15em;margin:0 auto 20px;
 }
-.closing h2 em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;color:var(--mint);}
+.closing h2 em{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;color:var(--accent);}
 .closing p{color:var(--ink-dim);max-width:440px;margin:0 auto 40px;}
 
 /* Footer */
@@ -276,7 +276,7 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0;}
         <div class="num"><span class="count" data-target="4.5" data-decimal="1">0</span><span>x</span></div>
         <div class="label">average ROAS</div>
       </div>
-      <div class="note">Meta ads, creative strategy, audit diagnostics, retention systems, content production, and ad intelligence — one team, one methodology.</div>
+      <div class="note">One team, one methodology, across wellness, fashion, jewellery, fintech, agri-tech and footwear.</div>
     </div>
   </div>
 </section>
@@ -291,10 +291,10 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0;}
     <div class="svc-list" style="margin-top:56px;">
       <div class="svc reveal"><div class="name">Meta Ads</div><div class="desc">Full-funnel campaign management with structure built for scale, not vanity metrics.</div></div>
       <div class="svc reveal"><div class="name">Creative Strategy</div><div class="desc">Concepts driven by what your account data says converts, refreshed before fatigue sets in.</div></div>
-      <div class="svc reveal"><div class="name">Audit Diagnostics</div><div class="desc">A fixed diagnostic framework applied to every account — findings that hold regardless of who ran the audit.</div></div>
+      <div class="svc reveal"><div class="name">Audit Diagnostics</div><div class="desc">A fixed diagnostic framework applied to every account, so findings hold regardless of who ran the audit.</div></div>
       <div class="svc reveal"><div class="name">Retention Systems</div><div class="desc">Email and lifecycle flows so acquisition wins don't leak out the back door.</div></div>
       <div class="svc reveal"><div class="name">Content Production</div><div class="desc">UGC, statics, and AI-assisted edits produced at the pace paid social actually demands.</div></div>
-      <div class="svc reveal"><div class="name">Ad Intelligence</div><div class="desc">Continuous monitoring across accounts so problems surface before they show up in reporting.</div></div>
+      <div class="svc reveal"><div class="name">Ad Intelligence</div><div class="desc">Continuous monitoring across every account so problems surface before they show up in reporting.</div></div>
     </div>
   </div>
 </section>
@@ -304,10 +304,10 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0;}
   <div class="wrap section-pad">
     <div class="dd-grid">
       <div class="dd-body reveal">
-        <div class="eyebrow"><b>01</b> — Intelligence layer</div>
+        <div class="eyebrow"><b>01</b> · Intelligence layer</div>
         <h3>Soren AI</h3>
         <p>Our in-house intelligence engine watches every live campaign in real time. It flags creative fatigue, audience overlap, and bid inefficiencies while they're still cheap to fix.</p>
-        <p class="small">Soren correlates performance drift with creative lifecycle, audience saturation, and competitive shifts — so the recommendation arrives before the wasted spend does, not in next month's report.</p>
+        <p class="small">Soren correlates performance drift with creative lifecycle, audience saturation, and competitive shifts. The recommendation arrives before the wasted spend does, not in next month's report.</p>
       </div>
       <div class="dd-visual reveal" id="sorenVis">
         <div class="soren-bars" aria-hidden="true">
@@ -334,10 +334,10 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0;}
   <div class="wrap section-pad">
     <div class="dd-grid flip">
       <div class="dd-body reveal">
-        <div class="eyebrow"><b>02</b> — Audit methodology</div>
+        <div class="eyebrow"><b>02</b> · Audit methodology</div>
         <h3>Signal Labs</h3>
         <p>One diagnostic framework, applied to every account without exception. Because every brand goes through the same audit model, the findings hold whatever the category, the scale, or who picked up the brief.</p>
-        <p class="small">Covers campaign architecture, pixel and CAPI health, creative fatigue scoring, audience overlap, bid strategy fit, and attribution integrity — cross-checked against category benchmarks before we recommend anything.</p>
+        <p class="small">Covers campaign architecture, pixel and CAPI health, creative fatigue scoring, audience overlap, bid strategy fit, and attribution integrity, cross-checked against category benchmarks before we recommend anything.</p>
       </div>
       <div class="dd-visual reveal">
         <div class="labs-grid" aria-hidden="true">
@@ -358,9 +358,9 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0;}
   <div class="wrap section-pad">
     <div class="dd-grid">
       <div class="dd-body reveal">
-        <div class="eyebrow"><b>03</b> — Creator network</div>
+        <div class="eyebrow"><b>03</b> · Creator network</div>
         <h3>Mint UGC</h3>
-        <p>A managed creator network that turns briefs into production-ready content. Creators are matched to your brand, reviewed against quality gates, and paid on delivery — zero coordination overhead on your side.</p>
+        <p>A managed creator network that turns briefs into production-ready content. Creators are matched to your brand, reviewed against quality gates, and paid on delivery, with zero coordination overhead on your side.</p>
         <p class="small">We handle the full lifecycle: brief, creator assignment, review, revision, delivery. Formats span UGC video, AI-assisted edits, and static creative at production scale.</p>
       </div>
       <div class="dd-visual reveal">
@@ -387,7 +387,7 @@ footer{border-top:1px solid var(--line-soft);padding:48px 0;}
 <section id="contact">
   <div class="wrap section-pad closing">
     <h2 class="reveal">Bring us the account. <em>We'll bring the signal.</em></h2>
-    <p class="reveal">A 30-minute call. We'll look at your account together and tell you exactly what we'd fix first — whether or not you hire us.</p>
+    <p class="reveal">A 30-minute call. We'll look at your account together and tell you exactly what we'd fix first, whether or not you hire us.</p>
     <a class="btn btn-solid reveal" href="#" data-book>Book a call</a>
   </div>
 </section>
@@ -507,8 +507,8 @@ function draw() {
 
   /* Single, faint glow behind the head — deliberately subtle */
   const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 1.3);
-  g.addColorStop(0, 'rgba(62,207,142,0.06)');
-  g.addColorStop(1, 'rgba(10,11,13,0)');
+  g.addColorStop(0, 'rgba(176,139,224,0.06)');
+  g.addColorStop(1, 'rgba(10,8,20,0)');
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, W, H);
 
@@ -533,7 +533,7 @@ function draw() {
       ctx.beginPath();
       ctx.moveTo(a.sx, a.sy);
       ctx.lineTo(b.sx, b.sy);
-      ctx.strokeStyle = `rgba(232,235,233,${(0.02 + depth * 0.07) * dim})`;
+      ctx.strokeStyle = `rgba(237,232,245,${(0.02 + depth * 0.07) * dim})`;
       ctx.lineWidth = 0.5;
       ctx.stroke();
     }
@@ -546,9 +546,9 @@ function draw() {
     ctx.beginPath();
     ctx.arc(p.sx, p.sy, 0.4 + depth * 1.6, 0, Math.PI * 2);
     if (depth > 0.82) {
-      ctx.fillStyle = `rgba(62,207,142,${(0.25 + depth * 0.45) * dim})`;
+      ctx.fillStyle = `rgba(176,139,224,${(0.25 + depth * 0.45) * dim})`;
     } else {
-      ctx.fillStyle = `rgba(232,235,233,${(0.05 + depth * 0.3) * dim})`;
+      ctx.fillStyle = `rgba(237,232,245,${(0.05 + depth * 0.3) * dim})`;
     }
     ctx.fill();
   });

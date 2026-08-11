@@ -455,7 +455,7 @@ const counterIO = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.count').forEach(el => counterIO.observe(el));
 
-/* ---------- Particle head ---------- */
+/* ---------- Hero canvas ---------- */
 const canvas = document.getElementById('field');
 const ctx = canvas.getContext('2d');
 let W, H, DPR;
@@ -471,97 +471,122 @@ function resize() {
 window.addEventListener('resize', resize);
 resize();
 
-/* Head profile: radius at each height level, chin (0) to skull (1) */
-function headRadius(t) {
-  if (t < 0.05) return 0.12 + t * 4;
-  if (t < 0.15) return 0.32 + (t - 0.05) * 3.5;
-  if (t < 0.25) return 0.67 + (t - 0.15) * 1.8;
-  if (t < 0.4) return 0.85 + (t - 0.25) * 0.5;
-  if (t < 0.55) return 0.92 - (t - 0.4) * 0.15;
-  if (t < 0.7) return 0.90 + (t - 0.55) * 0.2;
-  if (t < 0.82) return 0.93 - (t - 0.7) * 0.8;
-  if (t < 0.92) return 0.83 - (t - 0.82) * 3.5;
-  return 0.48 - (t - 0.92) * 5;
-}
+/* ---------- Falcon particle field ----------
+   The falcon is defined once as a silhouette, drawn to an offscreen canvas and
+   sampled on a grid. Sampling the real outline keeps it readable as a bird from
+   any distance, which a procedurally-built mesh never quite managed. */
 
-const rings = [];
-const RINGS = 50;
-for (let i = 0; i < RINGS; i++) {
-  const t = i / (RINGS - 1);
-  const y = 1 - t * 2;
-  const r = headRadius(t);
-  const n = Math.max(8, Math.round(r * 44));
-  const ring = [];
-  for (let j = 0; j < n; j++) {
-    const theta = (j / n) * Math.PI * 2;
-    ring.push({ x: Math.cos(theta) * r, y: y * 1.15, z: Math.sin(theta) * r });
+const FALCON_PATH = "M 0,-190 C 15,-186 25,-176 25,-158 C 25,-142 22,-126 30,-112 C 120,-136 198,-146 258,-142 C 376,-136 504,-78 558,-14 C 564,-8 561,-2 550,0 C 432,12 322,26 234,38 C 166,46 108,50 52,50 C 45,56 42,72 40,92 C 38,128 35,164 32,198 C 30,226 27,252 24,272 C 17,286 8,288 0,288 C -8,288 -17,286 -24,272 C -27,252 -30,226 -32,198 C -35,164 -38,128 -40,92 C -42,72 -45,56 -52,50 C -108,50 -166,46 -234,38 C -322,26 -432,12 -550,0 C -561,-2 -564,-8 -558,-14 C -504,-78 -376,-136 -258,-142 C -198,-146 -120,-136 -30,-112 C -22,-126 -25,-142 -25,-158 C -25,-176 -15,-186 0,-190 Z M -6,-186 L 0,-214 L 6,-186 Z";
+
+const PATH_HALF_SPAN = 564, PATH_TOP = -214, PATH_BOTTOM = 288;
+const OFF_W = 384;
+const off = document.createElement('canvas');
+const octx = off.getContext('2d', { willReadFrequently: true });
+const oScale = OFF_W / (PATH_HALF_SPAN * 2);
+const OFF_H = Math.ceil((PATH_BOTTOM - PATH_TOP) * oScale) + 2;
+off.width = OFF_W; off.height = OFF_H;
+octx.translate(OFF_W / 2, -PATH_TOP * oScale + 1);
+octx.scale(oScale, oScale);
+octx.fillStyle = '#fff';
+octx.fill(new Path2D(FALCON_PATH));
+const mask = octx.getImageData(0, 0, OFF_W, OFF_H).data;
+
+/* Sample the silhouette row by row. Consecutive samples in a row become a
+   contour line, which gives the field the same wireframe feel as before. */
+const strokes = [];
+const allPts = [];
+const STEP = 3;
+for (let oy = 1; oy < OFF_H; oy += STEP) {
+  let run = null;
+  for (let ox = 0; ox < OFF_W; ox += STEP) {
+    if (mask[(oy * OFF_W + ox) * 4 + 3] < 128) { run = null; continue; }
+    const x = ((ox - OFF_W / 2) / oScale) / PATH_HALF_SPAN;
+    const y = ((oy - 1) / oScale + PATH_TOP) / PATH_HALF_SPAN;
+    const p = {
+      x, y,
+      span: Math.abs(x),
+      /* wings arch away from the body; the breast sits proud of the plane */
+      arch: Math.pow(Math.abs(x), 1.7),
+      bulge: 0.06 * Math.exp(-(x * x) / 0.006)
+    };
+    allPts.push(p);
+    if (!run) { run = { pts: [] }; strokes.push(run); }
+    run.pts.push(p);
   }
-  rings.push(ring);
 }
-const allPts = rings.flat();
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-let angle = 0.6;
-let mouseX = 0;
-window.addEventListener('mousemove', e => { mouseX = (e.clientX / W - 0.5) * 0.25; });
+let mouseX = 0, t0 = 0;
+window.addEventListener('mousemove', e => { mouseX = (e.clientX / W - 0.5) * 0.22; });
 
-function draw() {
-  if (!reduceMotion) angle += 0.0022;
-  const rot = angle + mouseX;
+function draw(now) {
+  if (!t0) t0 = now || 0;
+  const t = reduceMotion ? 0 : ((now || 0) - t0) / 1000;
   ctx.clearRect(0, 0, W, H);
 
-  /* Head sits right of centre on wide screens, behind the text on narrow ones */
+  /* Sits right of centre on wide screens, behind the text on narrow ones */
   const wide = W > 900;
-  const R = wide ? Math.min(W * 0.19, 250) : Math.min(W * 0.34, 200);
-  const cx = wide ? W * 0.74 : W * 0.5;
-  const cy = wide ? H * 0.48 : H * 0.30;
-  /* On narrow screens the head sits behind the text, so fade it well back */
-  const dim = wide ? 1 : 0.3;
+  const R = wide ? Math.min(W * 0.17, 265) : Math.min(W * 0.24, 150);
+  const cx = wide ? W * 0.76 : W * 0.5;
+  const cy = wide ? H * 0.58 : H * 0.18;
+  const dim = wide ? 1 : 0.26;
 
-  /* Single, faint glow behind the head — deliberately subtle */
-  const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 1.3);
-  g.addColorStop(0, 'rgba(176,139,224,0.06)');
+  const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 1.4);
+  g.addColorStop(0, 'rgba(176,139,224,0.09)');
   g.addColorStop(1, 'rgba(10,8,20,0)');
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, W, H);
 
-  const cosA = Math.cos(rot), sinA = Math.sin(rot);
+  /* Wings flex, and the whole bird tilts and banks as if riding a thermal */
+  const flex = 0.85 + Math.sin(t * 0.70) * 0.42;
+  const rx = Math.sin(t * 0.13) * 0.18;
+  const ry = Math.sin(t * 0.19) * 0.26 + mouseX;
+  const rz = Math.sin(t * 0.16) * 0.09;
+  const cX = Math.cos(rx), sX = Math.sin(rx);
+  const cY = Math.cos(ry), sY = Math.sin(ry);
+  const cZ = Math.cos(rz), sZ = Math.sin(rz);
+  const fov = 560;
+
+  /* A pulse of brand purple runs from the breast out to the wingtips */
+  const front = ((t * 0.30) % 1.9) - 0.35;
+
   const projected = allPts.map(p => {
-    const x = p.x * cosA - p.z * sinA;
-    const z = p.x * sinA + p.z * cosA;
-    const fov = 500;
-    const scale = fov / (fov - z * R);
-    return { sx: cx + x * R * scale, sy: cy + p.y * R * scale, z };
+    const z0 = p.arch * 0.30 * flex + p.bulge;
+    const x1 = p.x * cZ - p.y * sZ, y1 = p.x * sZ + p.y * cZ;
+    const y2 = y1 * cX - z0 * sX, z1 = y1 * sX + z0 * cX;
+    const x2 = x1 * cY + z1 * sY, z2 = -x1 * sY + z1 * cY;
+    const s = fov / (fov - z2 * R);
+    return {
+      sx: cx + x2 * R * s, sy: cy + y2 * R * s,
+      d: Math.max(0, Math.min(1, 0.5 + z2 * 1.1)),
+      sig: Math.exp(-Math.pow((p.span - front) / 0.17, 2))
+    };
   });
 
-  /* Latitude lines */
+  /* Contour lines across the wings */
   let offset = 0;
-  for (const ring of rings) {
-    const n = ring.length;
-    for (let j = 0; j < n; j++) {
-      const a = projected[offset + j];
-      const b = projected[offset + (j + 1) % n];
-      if (a.z < -0.3 && b.z < -0.3) continue;
-      const depth = ((a.z + b.z) / 2 + 1) / 2;
+  for (const s of strokes) {
+    for (let j = 0; j < s.pts.length - 1; j++) {
+      const a = projected[offset + j], b = projected[offset + j + 1];
+      const depth = (a.d + b.d) / 2;
       ctx.beginPath();
       ctx.moveTo(a.sx, a.sy);
       ctx.lineTo(b.sx, b.sy);
-      ctx.strokeStyle = `rgba(237,232,245,${(0.02 + depth * 0.07) * dim})`;
+      ctx.strokeStyle = `rgba(237,232,245,${(0.03 + depth * 0.10) * dim})`;
       ctx.lineWidth = 0.5;
       ctx.stroke();
     }
-    offset += n;
+    offset += s.pts.length;
   }
 
-  /* Particles: neutral grey, mint only on the closest points */
+  /* Particles: pale grey, brand purple where the pulse is passing through */
   projected.forEach(p => {
-    const depth = (p.z + 1) / 2;
     ctx.beginPath();
-    ctx.arc(p.sx, p.sy, 0.4 + depth * 1.6, 0, Math.PI * 2);
-    if (depth > 0.82) {
-      ctx.fillStyle = `rgba(176,139,224,${(0.25 + depth * 0.45) * dim})`;
+    ctx.arc(p.sx, p.sy, 0.45 + p.d * 0.8 + p.sig * 0.9, 0, Math.PI * 2);
+    if (p.sig > 0.14) {
+      ctx.fillStyle = `rgba(176,139,224,${(0.28 + p.sig * 0.55) * dim})`;
     } else {
-      ctx.fillStyle = `rgba(237,232,245,${(0.05 + depth * 0.3) * dim})`;
+      ctx.fillStyle = `rgba(237,232,245,${(0.11 + p.d * 0.42) * dim})`;
     }
     ctx.fill();
   });
